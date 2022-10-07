@@ -8,7 +8,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body class="container">
 <h1 th:fragment = "styledHeader" class="fancyTitle" th:text="${title}"></h1>
 <div th:fragment = "linkList">
         <hr>
@@ -18,9 +18,9 @@
 </div>
 
 <nav th:fragment="navigation">
-        <ul>
-            <li><a href="/events">All Events</a></li>
-            <li><a href="/events/create">Create Event</a></li>
+        <ul class="nav">
+            <li class="nav-item"><a class="nav-link" href="/events">All Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="/events/create">Create Event</a></li>
         </ul>
 </nav>
 </body>
