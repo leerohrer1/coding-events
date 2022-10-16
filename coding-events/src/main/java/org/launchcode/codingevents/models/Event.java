@@ -1,8 +1,7 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.util.Date;
 import java.util.Objects;
 
 public class Event {
@@ -17,19 +16,40 @@ public class Event {
     @Size(max = 500, message = "Description is too long.")
     private String description;
 
-    @NotBlank
+    @NotBlank(message = "Location is required.")
+    @NotNull(message = "Location is required.")
+    private String location;
+
+    @PastOrPresent()
+    private Date date;
+
+    @NotBlank(message = "Email address is required.")
     @Email(message = "You have entered an invalid email address.")
     private String contactEmail;
 
-    public Event(String name, String description, String email) {
+    @NotNull
+    @Pattern(regexp = "^true$|^false$", message = "Input must be true or false.")
+    private String isRegistrationRequired;
+
+    @Positive(message="Number of attendees must be one or more.")
+    private int numberOfAttendees;
+
+    public Event(String name, String description, String location, Date date, String contactEmail, String isRegistrationRequired, int numberOfAttendees) {
         this.name = name;
         this.description = description;
-        this.contactEmail = email;
+        this.location = location;
+        this.date = date;
+        this.contactEmail = contactEmail;
+        this.isRegistrationRequired = isRegistrationRequired;
+        this.numberOfAttendees = numberOfAttendees;
         this.id = nextId;
         nextId++;
     }
 
-    public Event() {};
+    public Event() {
+        this.id = nextId;
+        nextId++;
+    }
 
     public String getName() {
         return name;
@@ -57,6 +77,38 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getIsRegistrationRequired() {
+        return isRegistrationRequired;
+    }
+
+    public void setIsRegistrationRequired(String isRegistrationRequired) {
+        this.isRegistrationRequired = isRegistrationRequired;
+    }
+
+    public int getNumberOfAttendees() {
+        return numberOfAttendees;
+    }
+
+    public void setNumberOfAttendees(int numberOfAttendees) {
+        this.numberOfAttendees = numberOfAttendees;
     }
 
     @Override
